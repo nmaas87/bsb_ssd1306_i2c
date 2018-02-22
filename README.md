@@ -63,6 +63,34 @@ ssd.write("1234567890", x=5, y=40, color=1)
 ssd.update()
 ```
 
+```
+#!/usr/bin/env
+import time
+from ssd1306_i2c import SSD1306
+ssd = SSD1306(0, 0x3c) # /dev/i2c-0, device address 0x3c
+
+ssd.clear()
+ssd.rect(1, 1, 127, 63, 1)
+ssd.update()
+
+def main():
+  while True:
+    ssd.rect_fill(10, 25, 111, 25, 0)
+    ssd.font("VerdanaDigits24")
+    ssd.write(time.strftime("%H:%M:%S"), x=12, y=25, color=1)
+    ssd.update()
+
+if __name__ == '__main__':
+
+  try:
+    main()
+  except KeyboardInterrupt:
+    pass
+  finally:
+    ssd.clear()
+    ssd.update()
+```
+
 Methods
 -------
 
